@@ -105,7 +105,13 @@ class LanguageFieldType extends FieldType
             return $view;
         }
 
-        return 'anomaly.field_type.language::' . $this->config('mode', 'dropdown');
+        $mode = $this->config('mode', 'dropdown');
+
+        if (!in_array($mode, ['dropdown', 'search'], true)) {
+            $mode = 'dropdown';
+        }
+
+        return 'anomaly.field_type.language::' . $mode;
     }
 
     /**
