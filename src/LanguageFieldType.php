@@ -1,5 +1,6 @@
 <?php namespace Anomaly\LanguageFieldType;
 
+use Anomaly\LanguageFieldType\Validation\ValidateLanguage;
 use Anomaly\Streams\Platform\Addon\FieldType\FieldType;
 
 /**
@@ -18,6 +19,27 @@ class LanguageFieldType extends FieldType
      * @var null
      */
     protected $inputView = null;
+
+    /**
+     * The validation rules.
+     *
+     * @var array
+     */
+    protected $rules = [
+        'valid_language',
+    ];
+
+    /**
+     * The custom validators.
+     *
+     * @var array
+     */
+    protected $validators = [
+        'valid_language' => [
+            'handler' => ValidateLanguage::class,
+            'message' => 'anomaly.field_type.language::message.invalid_language',
+        ],
+    ];
 
     /**
      * The default config.

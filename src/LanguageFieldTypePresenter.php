@@ -27,11 +27,17 @@ class LanguageFieldTypePresenter extends FieldTypePresenter
      */
     public function name()
     {
-        if (!$key = $this->object->getValue()) {
+        $key = $this->object->getValue();
+
+        if (!$key || !is_string($key)) {
             return null;
         }
 
-        return trans(array_get($this->object->getOptions(), $key));
+        if (!$name = array_get($this->object->getOptions(), $key)) {
+            return null;
+        }
+
+        return trans($name);
     }
 
     /**
@@ -42,7 +48,9 @@ class LanguageFieldTypePresenter extends FieldTypePresenter
      */
     public function translated($locale)
     {
-        if (!$key = $this->object->getValue()) {
+        $key = $this->object->getValue();
+
+        if (!$key || !is_string($key)) {
             return null;
         }
 
